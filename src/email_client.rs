@@ -9,7 +9,6 @@ pub struct EmailClient {
     mailer: SmtpTransport,
 }
 //TODO: remove unwraps()
-//TODO: Handle click on confirmation link twice scenario
 impl EmailClient {
     pub async fn send_email(
         &self,
