@@ -1,0 +1,10 @@
+database:
+  port: 5432
+  database_name: "kdc"
+  username: "postgres"
+  password: "password"
+email_client:
+  smtp_host: "TODO"
+  sender_email: "TODO"
+  sender_password: "TODO"
+  timeout_milliseconds: 5000
