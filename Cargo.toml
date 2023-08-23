@@ -10,7 +10,7 @@ path = "src/lib.rs"
 
 [[bin]]
 path = "src/main.rs"
-name = "settlement"
+name = "kriegdercreator"
 
 [dependencies]
 actix-web = "4"

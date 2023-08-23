@@ -15,16 +15,12 @@ if ! [ -x "$(command -v sqlx)" ]; then
   exit 1
 fi
 
-# Check if a custom user has been set, otherwise default to 'postgres'
 DB_USER="${POSTGRES_USER:=postgres}"
-# Check if a custom password has been set, otherwise default to 'password'
 DB_PASSWORD="${POSTGRES_PASSWORD:=password}"
-# Check if a custom database name has been set, otherwise default to 'newsletter'
-DB_NAME="${POSTGRES_DB:=settlement}"
-# Check if a custom port has been set, otherwise default to '5432'
-DB_PORT="${POSTGRES_PORT:=5432}"
-# Check if a custom host has been set, otherwise default to 'localhost'
+DB_NAME="${POSTGRES_DB:=kriegdercreator}"
 DB_HOST="${POSTGRES_HOST:=localhost}"
+DB_PORT="${POSTGRES_PORT:=5432}"
+                                                  
 
 # Allow to skip Docker if a dockerized Postgres database is already running
 if [[ -z "${SKIP_DOCKER}" ]]
@@ -43,7 +39,7 @@ then
       -e POSTGRES_DB=${DB_NAME} \
       -p "${DB_PORT}":5432 \
       -d \
-      --name "postgres_$(date '+%s')" \
+      --name "kriegdercreator_$(date '+%s')" \
       postgres -N 1000
       # ^ Increased maximum number of connections for testing purposes
 fi
@@ -55,9 +51,6 @@ until PGPASSWORD="${DB_PASSWORD}" psql -h "${DB_HOST}" -U "${DB_USER}" -p "${DB_
 done
 
 >&2 echo "Postgres is up and running on port ${DB_PORT} - running migrations now!"
-
->&2 echo "Increase file ulimit (necessary for MacOS)"
->&2 echo "ulimit -n 500"
 
 export DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}
 sqlx database create

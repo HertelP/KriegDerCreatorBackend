@@ -1,6 +1,6 @@
 database:
   port: 5432
-  database_name: "kdc"
+  database_name: "kriegdercreator"
   username: "postgres"
   password: "password"
 email_client:
